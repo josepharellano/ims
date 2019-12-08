@@ -5,139 +5,97 @@
  */
 package validator;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.scene.Node;
-import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 
 /**
  *
  * @author Joseph
  */
-public class Validator<T> {
+public class Validator {
     
     TextField field;
-    T value;
     ArrayList<IValidator> validations;
     
-    static IValidator notEmpty;
-    static IValidator currency;
+    public static IValidator isEmpty;
+    public static IValidator isCurrency;
+    public static IValidator isNum;
+    public static IValidator isPosNum;
     
     static {
-        notEmpty = (field)->{
-            String error = null;
+        isEmpty = (field)->{
             boolean result = field.getText().length() > 0;
             if(!result){
-                error = "Field is Empty";
+                throw new ValidationException("Empty",field);
             }
-            return new ValidationResult<>(error,result,null);
-        };    
+        };
+        isNum = (field)->{
+            Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+            boolean result = pattern.matcher(field.getText()).matches();
+            if(!result){
+                throw new ValidationException("Not a Number",field);
+            }
+        };
+        isPosNum = (field)->{
+            Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+            boolean result = pattern.matcher(field.getText()).matches();
+            if(!result){
+                throw new ValidationException("Not Positive",field);
+            }
+        };
+        isCurrency = (field)->{
+           Pattern pattern = Pattern.compile("(?:[$])\\s*\\d+(?:\\.\\d{2})?");
+           boolean result = pattern.matcher(field.getText()).matches();
+           if(!result){
+                throw new ValidationException("Invalid Currency Format",field);
+            }
+        };
     }
-    
-    
-    
+      
     public Validator(TextField field){
-        validations = new ArrayList();
+        validations = new ArrayList<>();
         this.field = field;
      
     }
     
-    public void validate() throws ValidationException {
-        ValidationResult result;
+    public void validate() throws ValidationException {  
         for(IValidator validator : validations){
-            result = validator.Validate(field);
-            if(!result.isValid()){
-                throw new ValidationException(result.getMsg(),field);
+            try{
+             validator.Validate(field);
+            }catch(ValidationException e){
+                throw e;
             }
         }
     }
-    
+
     public void addValidation(IValidator validation){
         validations.add(validation);
     }
     
     public void addValidation(Validators validate){
         switch(validate){
-            case NOTEMPTY : validations.add(notEmpty) ;
+            case ISEMPTY : validations.add(isEmpty); break;
+            case ISNUM : validations.add(isNum); break;
+            case ISCURRENCY : validations.add(isCurrency); break;
+            case ISPOSNUM : validations.add(isPosNum); break;
+            default : ;     
         }
     }
     
     public void removeValidation(IValidator validation){
         validations.remove(validation);
     }
-   
-    
-    //Built In Validation
-    public boolean isEmpty(String value){
-        return value.length() == 0;
+ 
+    //Allows for the creation of custom validations
+    public static boolean validate(IValidator operation) {
+     return true;
     }
-    
-    public double currencyValidation(TextField field) throws ValidationException {
-        String value = field.getText().replaceAll(",","");
-        Number currency;
-        
-        if(!isEmpty(value)){
-            try{
-                isEmpty(field.getText());   
-                Pattern pattern = Pattern.compile("(?:[$])\\s*\\d+(?:\\.\\d{2})?");
-                Matcher match = pattern.matcher(value);
-                if(match.matches()){
-                    currency = NumberFormat.getCurrencyInstance(Locale.US).parse(value);
-                }else{
-                    throw new Exception();
-                }
-
-                }catch(Exception e){
-                    throw new ValidationException("Currency Format Invalid\nFormat $00.00",field);
-                }
-        }else{
-            throw new ValidationException("Field Empty",field);
-        }
-        return currency.doubleValue();
-    }
-    
-    public boolean isPositiveNum(Number value){
-        return value.intValue() >= 0;
-    }
-    
-    public Number validateAndParseNum(TextField field) throws ValidationException{
-        
-        Number value;
-        try{
-            value = NumberFormat.getInstance().parse(field.getText());
-        }catch(Exception e){
-            throw new ValidationException("Non Numeric Input",field);
-        }
-        
-        if(!isPositiveNum(value)){
-            throw new ValidationException("Value must be positive",field);
-        }
-        return value;
-    }
-    
-    
-    /**
-     *
-     * @param <T>
-     * @param operation
-     * @param field
-     * @return
-     * @throws validator.ValidationException
-     */
-//    public static <T> T validate(IValidator operation,T field) {
-//        
-//     return field;
-//    }
     
     public enum Validators{
-        NOTEMPTY,
-        CURRENCY,
-        POSITIVE,
+        ISEMPTY,
+        ISCURRENCY,
+        ISNUM,
+        ISPOSNUM,
     }
 }

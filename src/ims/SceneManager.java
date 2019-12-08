@@ -61,7 +61,7 @@ public class SceneManager {
      *
      * @param <T>
      * @param view
-     * @return 
+     * @return View Controller 
      * @throws IOException
      */
     public final <T> T loadScene(Views view) throws IOException{

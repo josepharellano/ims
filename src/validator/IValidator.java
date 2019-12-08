@@ -14,6 +14,6 @@ import javafx.scene.control.TextField;
  * @param <T>
  */
 public interface IValidator{
-    public ValidationResult Validate(TextField field);
+    public void Validate(TextField field) throws ValidationException;
 }
 

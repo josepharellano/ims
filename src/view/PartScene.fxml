@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="400.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PartSceneController">
    <children>
@@ -35,7 +34,7 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="inputInvLevel" prefWidth="150.0" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="inputStock" prefWidth="150.0" promptText="Inv" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
@@ -68,35 +67,35 @@
                   </TextField>
                </children>
             </GridPane>
-            <Text fx:id="labelMax" strokeType="OUTSIDE" strokeWidth="0.0" text="Max" GridPane.rowIndex="4" />
-            <Text fx:id="labelCost" strokeType="OUTSIDE" strokeWidth="0.0" text="Price/Cost" GridPane.rowIndex="3" />
-            <Text fx:id="labelInv" strokeType="OUTSIDE" strokeWidth="0.0" text="Inv" GridPane.rowIndex="2" />
-            <Text fx:id="labelName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" GridPane.rowIndex="1" />
+            <Label fx:id="labelMax" text="Max" GridPane.rowIndex="4" />
+            <Label fx:id="labelCost" text="Price/Cost" GridPane.rowIndex="3" />
+            <Label fx:id="labelInv" text="Inv" GridPane.rowIndex="2" />
+            <Label fx:id="labelName" text="Name" GridPane.rowIndex="1" />
             <TextField fx:id="inputId" disable="true" editable="false" prefWidth="150.0" promptText="Auto Gen - Disabled" GridPane.columnIndex="1">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </TextField>
-            <Text fx:id="labelId" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+            <Label fx:id="labelId" text="ID" />
             <TextField fx:id="inputMachineId" promptText="Machine Id" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </TextField>
-            <Text fx:id="labelMachineId" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine ID" GridPane.rowIndex="5" />
+            <Label fx:id="labelMachineId" text="Machine ID" GridPane.rowIndex="5" />
             <TextField fx:id="inputCompany" promptText="Company Name" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </TextField>
-            <Text fx:id="labelCompany" strokeType="OUTSIDE" strokeWidth="0.0" text="Company Name" GridPane.rowIndex="5" />
+            <Label fx:id="labelCompany" text="Company Name" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Text fx:id="sceneTitle" fill="#514fbf" layoutX="26.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Part">
+      <Label fx:id="sceneTitle" layoutX="22.0" layoutY="21.0" text="Add Part" textFill="#4d55e4">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
-      </Text>
+      </Label>
       <RadioButton fx:id="selectInHouse" layoutX="126.0" layoutY="22.0" mnemonicParsing="false" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="partTypeGroup" />

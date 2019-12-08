@@ -47,8 +47,8 @@
                               <Region maxHeight="-Infinity" prefHeight="49.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                               <ButtonBar>
                                  <buttons>
-                                    <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" text="Search" />
-                                    <TextField />
+                                    <Button maxHeight="-Infinity" maxWidth="80.0" mnemonicParsing="false" onAction="#onSearchPart" prefHeight="20.0" prefWidth="80.0" text="Search" />
+                                    <TextField fx:id="inputPartSearch" maxWidth="115.0" />
                                  </buttons>
                               </ButtonBar>
                            </children>
@@ -61,12 +61,12 @@
                         <HBox prefHeight="49.0" prefWidth="406.0" BorderPane.alignment="CENTER">
                            <children>
                               <Region prefHeight="200.0" prefWidth="200.0" />
-                              <Button fx:id="addBtn" alignment="CENTER" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#onLoadPartScene" prefHeight="40.0" prefWidth="80.0" text="Add">
+                              <Button fx:id="addBtn" alignment="CENTER" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#onAddPart" prefHeight="40.0" prefWidth="80.0" text="Add">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onLoadPartScene" prefHeight="40.0" prefWidth="80.0" text="Modify">
+                              <Button fx:id="modifyBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onModifyPart" prefHeight="40.0" prefWidth="80.0" text="Modify">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -102,8 +102,8 @@
                               <Region maxHeight="-Infinity" prefHeight="49.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                               <ButtonBar>
                                  <buttons>
-                                    <Button mnemonicParsing="false" text="Search" />
-                                    <TextField />
+                                    <Button maxWidth="80.0" mnemonicParsing="false" onAction="#onSearchProduct" prefHeight="20.0" prefWidth="80.0" text="Search" />
+                                    <TextField fx:id="inputSearchProduct" maxWidth="115.0" />
                                  </buttons>
                               </ButtonBar>
                            </children>
@@ -143,7 +143,7 @@
                      <center>
                         <TableView fx:id="productsTable" prefHeight="300.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                            <columns>
-                              <TableColumn fx:id="productIDCol" prefWidth="75.0" text="Product ID" />
+                              <TableColumn fx:id="productIdCol" prefWidth="75.0" text="Product ID" />
                               <TableColumn fx:id="productNameCol" prefWidth="75.0" text="Product Name" />
                               <TableColumn fx:id="productStockCol" prefWidth="75.0" text="Inventory Level" />
                               <TableColumn fx:id="productPriceCol" prefWidth="75.0" text="Price Per Unit" />
